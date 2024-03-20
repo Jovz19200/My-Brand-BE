@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
-
+export interface UserType {
+    name?: string,
+    email?: string,
+    role?: string,
+    password?: string
+}
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -8,7 +13,8 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     role: {
         type: String,
