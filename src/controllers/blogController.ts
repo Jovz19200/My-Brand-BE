@@ -1,20 +1,23 @@
-const Blog = require("../models/blog");
-const uploadFile = require("../helpers/cloud");
+import Blog from "../models/blog";
+import { Request, Response } from "express";
+import uploadFile from "../helpers/cloud";
+import { Blog_structure} from "../models/blog";
 
-const createBlog = async (req, res) => {
+const createBlog = async (req: Request, res: Response) => {
+    let file : any  = req.file;
     try{
         const result = await uploadFile(req.file, res);
         const newBlog = await Blog.create({
             title: req.body.title,
             description: req.body.description,
-            image: result.secure_url
+            image: result
         });
         res.status(200).json({
             status: "success",
             message: "blog was created successfully!",
             data: newBlog
         })
-    } catch(err){
+    } catch(err: any){
         res.status(400).json({
             status: "error",
             error: err.message
@@ -23,14 +26,14 @@ const createBlog = async (req, res) => {
 }
 
 
-const getBlogs = async (req, res) => {
+const getBlogs = async (req: Request, res: Response) => {
     try{
         const blogs = await Blog.find();
         res.status(200).json({
             status: "success",
             data: blogs
         });
-    } catch(err){
+    } catch(err: any){
         res.status(400).json({
             status: "error",
             error: err.message
@@ -38,7 +41,7 @@ const getBlogs = async (req, res) => {
     }
 }
 
-const getBlogById = async (req, res) => {
+const getBlogById = async (req: Request, res: Response) => {
     try{
         const blog = await Blog.findById(req.params.id);
         if(!blog){
@@ -51,7 +54,7 @@ const getBlogById = async (req, res) => {
             status: "success",
             data: blog
         })
-    } catch(error){
+    } catch(error: any){
         res.status(400).json({
             status: "error",
             message: error.message
@@ -59,7 +62,7 @@ const getBlogById = async (req, res) => {
     }
 }
 
-const deleteBlog = async (req, res) => {
+const deleteBlog = async (req: Request, res: Response) => {
     const id = req.params.id;
     try {
       const blog = await Blog.findByIdAndDelete(id);
@@ -81,9 +84,9 @@ const deleteBlog = async (req, res) => {
     }
   };
 
-const updateBlog = async (req, res) => {
+const updateBlog = async (req: Request, res: Response) => {
     try {
-        const blog = await Blog.findById(req.params.id)
+        const blog: any = await Blog.findById(req.params.id)
         if(!blog){
             res.status(404).json({
                 status: "error",
@@ -99,7 +102,7 @@ const updateBlog = async (req, res) => {
         }
         if(req.file){
             const result = await uploadFile(req.file, res);
-            blog.image = result.secure_url;
+            blog.image = result;
         }
 
         await blog.save()
@@ -108,7 +111,7 @@ const updateBlog = async (req, res) => {
             message: "blog was updated successfully!",
             blog
         })
-    } catch(error) {
+    } catch(error: any) {
         res.status(400).json({
             status: "error",
             message: error.message
@@ -116,7 +119,7 @@ const updateBlog = async (req, res) => {
     }
 }
 
-module.exports = {
+export {
     createBlog,
     getBlogs,
     getBlogById,

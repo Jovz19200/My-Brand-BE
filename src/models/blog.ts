@@ -1,4 +1,11 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
+export interface Blog_structure {
+    title: string;
+    description: string;
+    image?: string;
+}
+
 
 const blogSchema = new mongoose.Schema({
     title: {
@@ -17,4 +24,4 @@ const blogSchema = new mongoose.Schema({
 
 const Blog = mongoose.model("Blog", blogSchema);
 
-module.exports = Blog;
+export default Blog;
