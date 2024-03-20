@@ -47,7 +47,7 @@ const getBlogById = async (req: Request, res: Response) => {
         if(!blog){
             return res.status(404).json({
                 status: "error",
-                message: "blog not found"
+                message: "blog was not found"
             })
         }
         return res.status(200).json({
@@ -69,7 +69,7 @@ const deleteBlog = async (req: Request, res: Response) => {
       if (!blog) {
         return res.status(404).json({
           status: "failed",
-          message: "blog not found",
+          message: "blog was not found",
         });
       }
       return res.status(204).json({
@@ -90,7 +90,7 @@ const updateBlog = async (req: Request, res: Response) => {
         if(!blog){
             res.status(404).json({
                 status: "error",
-                message: "blog not found"
+                message: "blog was not found"
             });
         }
         if (req.body.title) {

@@ -12,47 +12,36 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isLogged = void 0;
-const userService_1 = require("../services/userService");
+exports.isAdmin = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 dotenv_1.default.config();
-const isLogged = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    let token = undefined;
+const isAdmin = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { user } = req;
     try {
-        if (req.headers.authorization &&
-            req.headers.authorization.startsWith("Bearer ")) {
-            token = req.headers.authorization.split(" ")[1];
-        }
-        if (!token) {
+        if (!user) {
             return res.status(401).json({
                 status: "Unauthorized",
-                message: "You are not logged in. Please login to continue.",
+                message: "you are not logged in, login to continue!",
             });
         }
-        const secret = process.env.JWT_SECRET;
-        if (!secret) {
-            throw new Error("JWT secret is not defined.");
-        }
-        if (typeof token !== "string") {
-            throw new Error("Token is not a string.");
-        }
-        const decoded = jsonwebtoken_1.default.verify(token, secret);
-        const loggedUser = yield (0, userService_1.getSingleUser)(decoded.userId);
-        if (!loggedUser) {
+        const isAdmin = (user === null || user === void 0 ? void 0 : user.role) === "admin";
+        if (!isAdmin) {
             return res.status(401).json({
                 status: "Unauthorized",
-                message: "Token has expired. Please login again.",
+                message: "only admin user have this access"
             });
         }
-        req.user = loggedUser;
-        next();
+        if (user && isAdmin) {
+            next();
+        }
+        else {
+            throw new Error("you are not authorised for this action");
+        }
     }
     catch (error) {
-        return res.status(401).json({
-            status: "failed",
-            error: error.message + " Token has expired. Please login again.",
+        return res.status(500).json({
+            message: "Internal server error",
         });
     }
 });
-exports.isLogged = isLogged;
+exports.isAdmin = isAdmin;

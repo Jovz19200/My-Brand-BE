@@ -1,6 +1,7 @@
 import express from "express";
 import { Request, Response } from "express";
 import blogRouter from "./routes/blogRouter";
+import userRouter from "./routes/userRouter";
 import commentRouter from "./routes/commentRouter";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -30,6 +31,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/blogs", blogRouter);
 app.use("/blogs", commentRouter)
+app.use("/users", userRouter)
 
 
 app.use("/*", (req: Request, res: Response) => {

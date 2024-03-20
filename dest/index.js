@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const blogRouter_1 = __importDefault(require("./routes/blogRouter"));
+const userRouter_1 = __importDefault(require("./routes/userRouter"));
 const commentRouter_1 = __importDefault(require("./routes/commentRouter"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 });
 app.use("/blogs", blogRouter_1.default);
 app.use("/blogs", commentRouter_1.default);
+app.use("/users", userRouter_1.default);
 app.use("/*", (req, res) => {
     res.status(404).json({
         status: "error",

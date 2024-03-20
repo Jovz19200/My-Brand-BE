@@ -13,7 +13,7 @@ declare global {
     }
 }
 
-export const isLoggedIn = async (req: Request, res: Response, next: NextFunction) => {
+export const isLogged = async (req: Request, res: Response, next: NextFunction) => {
     let token: string | undefined = undefined;
     try{
         if (

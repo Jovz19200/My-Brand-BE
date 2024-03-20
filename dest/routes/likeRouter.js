@@ -7,6 +7,6 @@ const express_1 = __importDefault(require("express"));
 const likeController_1 = require("../controllers/likeController");
 const router = express_1.default.Router();
 const isLogged_1 = require("../middlewares/isLogged");
-router.post("/:id/likes", isLogged_1.isLoggedIn, likeController_1.like);
+router.post("/:id/likes", isLogged_1.isLogged, likeController_1.like);
 router.get("/:id/likes", likeController_1.getLikes);
 exports.default = router;
