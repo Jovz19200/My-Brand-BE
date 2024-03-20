@@ -1,6 +1,7 @@
 import express from "express";
 import { Request, Response } from "express";
 import blogRouter from "./routes/blogRouter";
+import commentRouter from "./routes/commentRouter";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -10,9 +11,6 @@ dotenv.config();
 
 
 const PORT = process.env.PORT || 5000
-
-
-
 
 
 mongoose.connect(process.env.mongoURI as string).then(() => {
@@ -31,6 +29,7 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 app.use("/blogs", blogRouter);
+app.use("/blogs", commentRouter)
 
 
 app.use("/*", (req: Request, res: Response) => {
