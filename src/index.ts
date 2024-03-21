@@ -6,16 +6,16 @@ import commentRouter from "./routes/commentRouter";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
-const app = express();
-dotenv.config();
 
+dotenv.config();
+export const app = express();
 
 
 const PORT = process.env.PORT || 5000
 
 
 mongoose.connect(process.env.mongoURI as string).then(() => {
-    console.log("mongoDB Connected!")
+   
 }).catch(err => console.log(err));
 
 app.use(express.json())
@@ -25,13 +25,13 @@ app.use(cors())
 app.get("/", (req: Request, res: Response) => {
     res.status(200).json({
         status: "success",
-        message: "welcome to my brand backend"
+        message: "welcome to My Brand Backend"
     })
 })
 
-app.use("/blogs", blogRouter);
-app.use("/blogs", commentRouter)
-app.use("/users", userRouter)
+app.use("/api/v1/blogs", blogRouter);
+app.use("/api/v1/blogs", commentRouter)
+app.use("/api/v1/users", userRouter)
 
 
 app.use("/*", (req: Request, res: Response) => {
