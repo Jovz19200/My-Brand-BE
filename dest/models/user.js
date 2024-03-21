@@ -21,10 +21,6 @@ const UserSchema = new mongoose_1.default.Schema({
     password: {
         type: String,
         required: true
-    },
-    fullname: {
-        type: String,
-        required: true
-    },
+    }
 });
 exports.default = mongoose_1.default.model("User", UserSchema);
