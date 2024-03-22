@@ -14,7 +14,7 @@ const options = {
   servers: [{
     url: "http://localhost:8080"
   }, {
-    url: "https://mybrand-be-x023.onrender.com/"
+    url: "https://my-brand-be-sor4.onrender.com/"
   }],
 
   basePath: "/",

@@ -12,16 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectDB = void 0;
+exports.closeDB = exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 require('dotenv').config();
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const connect = yield mongoose_1.default.connect(process.env.mongoURI);
-        console.log(`MongoDB connected`);
     }
     catch (err) {
         console.log(err);
     }
 });
 exports.connectDB = connectDB;
+const closeDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield mongoose_1.default.connection.close();
+    }
+    catch (err) {
+        console.log(err);
+    }
+});
+exports.closeDB = closeDB;
