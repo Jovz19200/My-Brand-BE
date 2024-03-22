@@ -36,4 +36,13 @@ describe('Blog Controller', () => {
         expect(res.body.status).toEqual('success');
         expect(res.body.data._id).toEqual(blogId);
     }));
+    test('POST /', () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield (0, supertest_1.default)(index_1.app)
+            .post('/api/v1/blogs')
+            .send({
+            title: 'Test Blog',
+            content: 'This is a test blog',
+            Image: '../images/test1.jpg',
+        });
+    }));
 });

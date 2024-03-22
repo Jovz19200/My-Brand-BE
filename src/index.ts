@@ -6,11 +6,12 @@ import commentRouter from "./routes/commentRouter";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
-
+import swaggerUi from "swagger-ui-express";
+import docRouter from "./swagger_doc/swagger";
 dotenv.config();
-export const app = express();
+ const app = express();
 
-
+export { app };
 const PORT = process.env.PORT || 5000
 
 
@@ -18,6 +19,7 @@ mongoose.connect(process.env.mongoURI as string).then(() => {
    
 }).catch(err => console.log(err));
 
+app.use('/api-docs', docRouter);
 app.use(express.json())
 app.use(express.urlencoded({ extended: false}))
 app.use(cors())

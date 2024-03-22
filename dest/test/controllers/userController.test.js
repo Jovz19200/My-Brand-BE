@@ -18,11 +18,15 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const globals_1 = require("@jest/globals");
 const db_1 = require("../../db_config/db");
+const db_2 = require("../../db_config/db");
 (0, globals_1.describe)('Database Connection', () => {
     (0, globals_1.test)('should connect to the database', () => __awaiter(void 0, void 0, void 0, function* () {
         yield (0, db_1.connectDB)();
     }));
 });
+(0, globals_1.afterAll)(() => __awaiter(void 0, void 0, void 0, function* () {
+    (0, db_2.closeDB)();
+}));
 (0, globals_1.describe)("GET /", () => {
     (0, globals_1.test)('responds with status 200 successs!', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield (0, supertest_1.default)(index_1.app).get("/api/v1/users");
@@ -33,7 +37,7 @@ const db_1 = require("../../db_config/db");
     (0, globals_1.test)('responds with status 201 user created!', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield (0, supertest_1.default)(index_1.app).post("/api/v1/users").send({
             name: "Test User",
-            email: "testUser12@gmail.com",
+            email: "testUser5@gmail.com",
             role: "admin",
             password: "test@123"
         });

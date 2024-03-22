@@ -1,13 +1,18 @@
 
 import supertest from  'supertest';
 import { app } from '../../index'; 
-import { getBlogs, getBlogById } from '../../controllers/blogController';
 import { connectDB } from '../../db_config/db';
+import { closeDB } from '../../db_config/db';
+
 describe('database connection', ()=> {
 test('must open db', async ()=>{
      await connectDB();
 });
+
+
 })
+
+
 
 describe('Blog Controller', () => {
   test('GET /', async () => {
@@ -28,4 +33,14 @@ describe('Blog Controller', () => {
     expect(res.body.status).toEqual('success');
     expect(res.body.data._id).toEqual(blogId);
   });
+
+  test('POST /', async () => {
+    const res = await supertest(app)
+      .post('/api/v1/blogs')
+      .send({
+        title: 'Test Blog',
+        content: 'This is a test blog',
+        Image: '../images/test1.jpg',
+      })
+});
 });
