@@ -9,7 +9,7 @@ const docRouter = express_1.default.Router();
 const options = {
     openapi: "3.0.1",
     info: {
-        title: "API DOC My_Brand_BE",
+        title: "API DOC My_Brand_BE JOVZ19200",
         version: "1.0.0",
         description: "Documentation of My Brand Backend.",
     },
