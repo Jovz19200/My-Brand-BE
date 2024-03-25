@@ -26,7 +26,7 @@ describe("POST /", () => {
     test('responds with status 201 user created!', async () => {
       const response = await supertest(app).post("/api/v1/users").send({
         name: "Test User",
-        email: "testUser5@gmail.com",
+        email: "testUser@gmail.com",
         role: "admin",
         password: "test@123"
       });

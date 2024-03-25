@@ -4,7 +4,7 @@ const router = express.Router();
 import { isAdmin } from "../middlewares/isAdmin";
 import { isLogged } from "../middlewares/isLogged";
 
-router.post("/", isAdmin, registerUser);
+router.post("/", registerUser);
 router.get("/", isAdmin, getAllUsers);
 router.get("/:id", getUserById);
 router.patch("/:id", updateUser);

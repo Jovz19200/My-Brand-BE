@@ -37,7 +37,7 @@ const db_2 = require("../../db_config/db");
     (0, globals_1.test)('responds with status 201 user created!', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield (0, supertest_1.default)(index_1.app).post("/api/v1/users").send({
             name: "Test User",
-            email: "testUser5@gmail.com",
+            email: "testUser@gmail.com",
             role: "admin",
             password: "test@123"
         });
