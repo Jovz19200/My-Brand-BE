@@ -14,7 +14,7 @@ env:
   API_SECRET: ${{secrets.API_SECRET}}
   JWT_SECRET: ${{secrets.JWT_SECRET}}
   DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+ 
 
   
 jobs:
