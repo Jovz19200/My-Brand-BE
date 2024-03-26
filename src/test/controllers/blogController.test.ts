@@ -18,7 +18,7 @@ afterAll(async () => {
 
 
 describe('Blog Controller', () => {
-  test('GET /', async () => {
+  it('GET /', async () => {
     const res:Response = await request.get('/api/v1/blogs');
       expect(res.status).toBe(200);
 
@@ -26,7 +26,7 @@ describe('Blog Controller', () => {
     expect(Array.isArray(res.body.data)).toBe(true);
   });
 
-  test('GET /', async () => {
+  it('GET /', async () => {
     const blogId = '65faa1650d0a7d15ded4deb4'; 
     const res = await request.get(`/api/v1/blogs/${blogId}`)
       expect(res.status).toBe(200);

@@ -22,7 +22,7 @@ let token: any;
 // USers Test
 
 describe("Login /", () => {
-  test('responds with status 200 successs!', async () => {
+  it('responds with status 200 successs!', async () => {
     const response = await request.post("/api/v1/users/auth").send({
       email: "gisubizo.jovan12@gmail.com",
       password: "ten10@2021"
@@ -35,7 +35,7 @@ describe("Login /", () => {
     })
 
     describe("GET /", () => {
-    test('responds with status 200 successs!', async () => {
+    it('responds with status 200 successs!', async () => {
       const response: Response = await request.get("/api/v1/users").set("Authorization", `Bearer ${token}`);
       expect(response.status).toBe(200);
     });
@@ -43,7 +43,7 @@ describe("Login /", () => {
 
 
 describe("POST /", () => {
-    test('responds with status 201 user created!', async () => {  
+    it('responds with status 201 user created!', async () => {  
       const user :any ={
         name: "Test User",
         email: "testUser55@gmail.com",
