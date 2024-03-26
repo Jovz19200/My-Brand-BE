@@ -34,12 +34,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci    
+    - run: npm ci 
+    - run: npm test    
     - run: npm run build --if-present
-    - run: npm test   
-
+      
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v4.0.1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+
         slug: Jovz19200/My-Brand-BE
+
