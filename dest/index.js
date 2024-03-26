@@ -15,7 +15,6 @@ const swagger_1 = __importDefault(require("./swagger_doc/swagger"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 exports.app = app;
-const PORT = process.env.PORT || 5000;
 mongoose_1.default.connect(process.env.mongoURI).then(() => {
 }).catch(err => console.log(err));
 app.use('/api-docs', swagger_1.default);
@@ -37,6 +36,9 @@ app.use("/*", (req, res) => {
         message: "Invalid url"
     });
 });
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
-});
+if (require.main === module) {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`Server started on port ${PORT}`);
+    });
+}

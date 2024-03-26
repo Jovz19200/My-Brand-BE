@@ -14,7 +14,7 @@ const options = {
         description: "Documentation of My Brand Backend.",
     },
     servers: [{
-            url: "http://localhost:8080"
+            url: "http://localhost:5000"
         }, {
             url: "https://my-brand-be-sor4.onrender.com/"
         }],
