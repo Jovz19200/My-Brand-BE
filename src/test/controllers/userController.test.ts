@@ -1,35 +1,70 @@
-import supertest from "supertest";
+import {SuperTest, Response, Request} from "supertest";
 import {app} from "../../index";
 import dotenv from "dotenv"
 dotenv.config()
 import { test, it, describe, expect, beforeAll, afterAll } from "@jest/globals";
 import {connectDB }from '../../db_config/db';
 import {closeDB} from '../../db_config/db';
+import { Test } from "supertest";
+import User from "../../models/user";
 
-describe('Database Connection', () => {
-    test('should connect to the database', async () => {
-        await connectDB();
-    });
-});
+const request = require('supertest')(app);
+
+beforeAll(async () => {
+  await connectDB();
+})
 
 afterAll(async () => {
-  closeDB();
+  await closeDB();
 });
-describe("GET /", () => {
+let token: any;
+
+// USers Test
+
+describe("Login /", () => {
+  test('responds with status 200 successs!', async () => {
+    const response = await request.post("/api/v1/users/auth").send({
+      email: "gisubizo.jovan12@gmail.com",
+      password: "ten10@2021"
+    })
+
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe("success");
+    token = response.body.token;
+})
+    })
+
+    describe("GET /", () => {
     test('responds with status 200 successs!', async () => {
-      const response = await supertest(app).get("/api/v1/users");
+      const response: Response = await request.get("/api/v1/users").set("Authorization", `Bearer ${token}`);
       expect(response.status).toBe(200);
     });
 });
 
+
 describe("POST /", () => {
-    test('responds with status 201 user created!', async () => {
-      const response = await supertest(app).post("/api/v1/users").send({
+    test('responds with status 201 user created!', async () => {  
+      const user :any ={
         name: "Test User",
-        email: "testUser5@gmail.com",
+        email: "testUser55@gmail.com",
         role: "admin",
         password: "test@123"
-      });
+      }
+      const existingUser : any= User.findOne({email: user.email});
+      console.log(existingUser.body)
+      if (existingUser) {
+        User.deleteOne(existingUser)
+      }
+      else{
+      const response = await request.post("/api/v1/users").send(user);
+
+      console.log(response.body)
       expect(response.status).toBe(201);
+      }
+
+      
  });
 });
+
+
+// Querries

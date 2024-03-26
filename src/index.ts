@@ -12,7 +12,7 @@ dotenv.config();
  const app = express();
 
 export { app };
-const PORT = process.env.PORT || 5000
+
 
 
 mongoose.connect(process.env.mongoURI as string).then(() => {
@@ -43,6 +43,10 @@ app.use("/*", (req: Request, res: Response) => {
     })
 })
 
+if (require.main === module)
+{
+const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });
+} 

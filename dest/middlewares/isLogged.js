@@ -14,9 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isLogged = void 0;
 const userService_1 = require("../services/userService");
+const jsonwebtoken_1 = require("jsonwebtoken");
 const dotenv_1 = __importDefault(require("dotenv"));
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const jsonwebtoken_2 = __importDefault(require("jsonwebtoken"));
 dotenv_1.default.config();
+const generateToken = (user) => {
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+        throw new Error("JWT secret is not defined.");
+    }
+    return (0, jsonwebtoken_1.sign)({ email: user.email }, secret, { expiresIn: "5h" });
+};
 const isLogged = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let token = undefined;
     try {
@@ -37,7 +45,7 @@ const isLogged = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
         if (typeof token !== "string") {
             throw new Error("Token is not a string.");
         }
-        const decoded = jsonwebtoken_1.default.verify(token, secret);
+        const decoded = jsonwebtoken_2.default.verify(token, secret);
         const loggedUser = yield (0, userService_1.getSingleUser)(decoded.userId);
         if (!loggedUser) {
             return res.status(401).json({

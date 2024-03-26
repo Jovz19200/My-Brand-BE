@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, {sign, verify} from "jsonwebtoken";
 import { getSingleUser } from "../services/userService";
 import { Request, Response, NextFunction } from "express";
 import { UserType } from "../models/user";
@@ -12,6 +12,15 @@ declare global {
         }
     }
 }
+const generateToken = (user: any) =>{
+    const secret: string | undefined = process.env.JWT_SECRET;
+    if (!secret) {
+        throw new Error("JWT secret is not defined.");
+    }
+    return sign({email: user.email}, secret, {expiresIn: "5h"})
+
+}
+
 
 export const Authorization = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     let token: string | undefined = undefined;
