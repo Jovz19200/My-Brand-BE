@@ -4,7 +4,7 @@
   "description": "My-Brand-BE serves as the backend for the MyBrand project. It can handle the server-side logic and database operations using Node.js and Express. MongoDB is utilized as the database to store and manage data related to the project.",
   "main": "index.js",
   "scripts": {
-    "build": "tsc --watch",
+    "build": "tsc",
     "start": "npm run build && nodemon dest/index.js",
     "test": "jest --detectOpenHandles --coverage"
   },
