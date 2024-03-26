@@ -20,13 +20,13 @@ afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, db_2.closeDB)();
 }));
 describe('Blog Controller', () => {
-    test('GET /', () => __awaiter(void 0, void 0, void 0, function* () {
+    it('GET /', () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request.get('/api/v1/blogs');
         expect(res.status).toBe(200);
         expect(res.body.status).toEqual('success');
         expect(Array.isArray(res.body.data)).toBe(true);
     }));
-    test('GET /', () => __awaiter(void 0, void 0, void 0, function* () {
+    it('GET /', () => __awaiter(void 0, void 0, void 0, function* () {
         const blogId = '65faa1650d0a7d15ded4deb4';
         const res = yield request.get(`/api/v1/blogs/${blogId}`);
         expect(res.status).toBe(200);

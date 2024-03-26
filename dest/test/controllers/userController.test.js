@@ -29,7 +29,7 @@ const request = require('supertest')(index_1.app);
 let token;
 // USers Test
 (0, globals_1.describe)("Login /", () => {
-    (0, globals_1.test)('responds with status 200 successs!', () => __awaiter(void 0, void 0, void 0, function* () {
+    (0, globals_1.it)('responds with status 200 successs!', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield request.post("/api/v1/users/auth").send({
             email: "gisubizo.jovan12@gmail.com",
             password: "ten10@2021"
@@ -40,13 +40,13 @@ let token;
     }));
 });
 (0, globals_1.describe)("GET /", () => {
-    (0, globals_1.test)('responds with status 200 successs!', () => __awaiter(void 0, void 0, void 0, function* () {
+    (0, globals_1.it)('responds with status 200 successs!', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield request.get("/api/v1/users").set("Authorization", `Bearer ${token}`);
         (0, globals_1.expect)(response.status).toBe(200);
     }));
 });
 (0, globals_1.describe)("POST /", () => {
-    (0, globals_1.test)('responds with status 201 user created!', () => __awaiter(void 0, void 0, void 0, function* () {
+    (0, globals_1.it)('responds with status 201 user created!', () => __awaiter(void 0, void 0, void 0, function* () {
         const user = {
             name: "Test User",
             email: "testUser55@gmail.com",

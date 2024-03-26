@@ -15,7 +15,7 @@ const swagger_1 = __importDefault(require("./swagger_doc/swagger"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 exports.app = app;
-mongoose_1.default.connect(process.env.mongoURI).then(() => {
+mongoose_1.default.connect(process.env.MONGOURI).then(() => {
 }).catch(err => console.log(err));
 app.use('/api-docs', swagger_1.default);
 app.use(express_1.default.json());
