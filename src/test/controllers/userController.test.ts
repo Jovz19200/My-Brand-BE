@@ -57,7 +57,6 @@ describe("POST /", () => {
       }
       else{
       const response = await request.post("/api/v1/users").send(user);
-
       console.log(response.body)
       expect(response.status).toBe(201);
       }
