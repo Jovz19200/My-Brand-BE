@@ -4,7 +4,7 @@ require('dotenv').config()
 
 export const  connectDB = async() =>{
     try {
-        const connect  = await mongoose.connect(process.env.mongoURI as string);
+        const connect  = await mongoose.connect(process.env.MONGOURI as string);
     }
     catch(err){
         console.log(err);
