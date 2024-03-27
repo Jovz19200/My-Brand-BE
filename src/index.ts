@@ -18,10 +18,11 @@ mongoose.connect(process.env.MONGOURI as string).then(() => {
    
 }).catch(err => console.log(err));
 
+app.use(cors())
 app.use('/api-docs', docRouter);
 app.use(express.json())
 app.use(express.urlencoded({ extended: false}))
-app.use(cors())
+
 
 app.get("/", (req: Request, res: Response) => {
     res.status(200).json({
