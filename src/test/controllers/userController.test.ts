@@ -19,7 +19,10 @@ afterAll(async () => {
 });
 let token: any;
 
+
+
 // USers Test
+
 
 describe("Login /", () => {
   it('responds with status 200 successs!', async () => {
@@ -36,7 +39,7 @@ describe("Login /", () => {
 
     describe("GET /", () => {
     it('responds with status 200 successs!', async () => {
-      const response: Response = await request.get("/api/v1/users");
+      const response: Response = await request.get("/api/v1/users").set('Authorization', `Bearer ${token}`);
       expect(response.status).toBe(200);
     });
 });
@@ -67,3 +70,23 @@ describe("POST /", () => {
 
 
 // Querries
+
+describe("POST a query", () => {
+  it('responds with status 201 query created!', async () => {
+    const response = await request.post("/api/v1/queries").send({
+      name: "Test User",
+      email: "gisubizo.jovan@gmail.com",
+      message: "I have a question"
+    })
+
+    expect(response.status).toBe(201);
+    })
+
+  it('responds with status 400 query not created!', async () => {
+    const response = await request.post("/api/v1/queries").send({
+      name: "Test User",
+      email: "",
+      message: "I have a question"})
+    expect(response.status).toBe(400);
+  })
+})
