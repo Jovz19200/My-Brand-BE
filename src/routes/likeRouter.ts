@@ -1,9 +1,9 @@
 import express from "express"
 import { like, getLikes } from "../controllers/likeController"
 const router = express.Router()
-import { isLogged } from "../middlewares/isLogged";
+import { Authorization } from "../middlewares/authorization";
 
-router.post("/:id/likes", isLogged, like);
+router.post("/:id/likes", Authorization, like);
 router.get("/:id/likes", getLikes);
 
 export default router;

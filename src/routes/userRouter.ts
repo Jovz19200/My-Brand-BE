@@ -5,7 +5,7 @@ import { isAdmin } from "../middlewares/isAdmin";
 import { isLogged } from "../middlewares/isLogged";
 
 router.post("/", registerUser);
-router.get("/", isLogged, isAdmin, getAllUsers);
+router.get("/", isAdmin, getAllUsers);
 router.get("/:id", isLogged, getUserById);
 router.patch("/:id", isAdmin, updateUser);
 router.delete("/:id", isAdmin, deleteUser);
