@@ -10,7 +10,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import docRouter from "./swagger_doc/swagger";
-import LikeRouter from "./routes/likeRouter";
+
 import like from "./models/like";
 dotenv.config();
  const app = express();
