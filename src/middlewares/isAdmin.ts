@@ -20,7 +20,8 @@ export const isAdmin = async (req: Request, res: Response, next: NextFunction) =
                 message: "you are not logged in, login to continue!",
             });
         }
-        const isAdmin = user?.role === "admin";
+        else{
+            const isAdmin = user?.role === "admin";
         if(!isAdmin){
             return res.status(401).json({
                 status: "Unauthorized",
@@ -32,6 +33,8 @@ export const isAdmin = async (req: Request, res: Response, next: NextFunction) =
         } else {
             throw new Error("you are not authorised for this action")
         }
+        }
+        
     } catch (error: any) {
         return res.status(500).json({
             message: "Internal server error",

@@ -9,9 +9,9 @@ import { isLogged } from "../middlewares/isLogged";
 const router = express.Router();
 
 router.get("/", getBlogs);
-router.post("/", isAdmin, upload.single("image"), createBlog);
+router.post("/", isLogged, isAdmin, upload.single("image"), createBlog);
 router.get("/:id", getBlogById);
-router.put("/:id", isAdmin,upload.single("image"), updateBlog);
-router.delete("/:id", isAdmin, deleteBlog);
+router.put("/:id", isLogged, isAdmin,upload.single("image"), updateBlog);
+router.delete("/:id", isLogged, isAdmin, deleteBlog);
 
 export default router;

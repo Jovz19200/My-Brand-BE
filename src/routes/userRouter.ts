@@ -7,7 +7,7 @@ import { Authorization } from "../middlewares/authorization";
 
 router.post("/", registerUser);
 router.get("/", isLogged, isAdmin, getAllUsers);
-router.get("/:id", isLogged, getUserById);
+router.get("/:id", isLogged, isAdmin, getUserById);
 router.patch("/:id", isLogged, isAdmin, updateUser);
 router.delete("/:id", isLogged, isAdmin, deleteUser);
 router.post("/auth", authUser);
