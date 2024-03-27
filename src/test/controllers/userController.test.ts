@@ -36,7 +36,7 @@ describe("Login /", () => {
 
     describe("GET /", () => {
     it('responds with status 200 successs!', async () => {
-      const response: Response = await request.get("/api/v1/users").set("Authorization", `Bearer ${token}`);
+      const response: Response = await request.get("/api/v1/users");
       expect(response.status).toBe(200);
     });
 });
