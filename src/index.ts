@@ -27,8 +27,6 @@ app.use(cors())
 app.use('/api-docs', docRouter);
 app.use(express.json())
 app.use(express.urlencoded({ extended: false}))
-
-
 app.get("/", (req: Request, res: Response) => {
     res.status(200).json({
         status: "success",
@@ -41,9 +39,6 @@ app.use("/api/v1/blogs", commentRouter)
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1", QueriesRouter)
 app.use("/api/v1/blogs", LikeRouter)
-
-
-
 app.use("/*", (req: Request, res: Response) => {
     res.status(404).json({
         status: "error",
