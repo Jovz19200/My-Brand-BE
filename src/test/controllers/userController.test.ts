@@ -71,6 +71,7 @@ describe("POST /", () => {
 
 // Querries
 
+
 describe("POST a query", () => {
   it('responds with status 201 query created!', async () => {
     const response = await request.post("/api/v1/queries").send({
@@ -90,3 +91,4 @@ describe("POST a query", () => {
     expect(response.status).toBe(400);
   })
 })
+
