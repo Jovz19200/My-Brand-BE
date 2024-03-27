@@ -3,17 +3,17 @@ import Blog from "../models/blog";
 import { Request, Response } from "express";
 
 export const addComment = async (req: Request, res: Response) => {
+  let user : any = req.user;
     try {
       const blogId = req.params.id;
-      const { name, email, content} = req.body;
       const blog = await Blog.findOne({ _id: blogId });
       if (!blog) {
         return res.status(404).send({ error: "Blog Not Found" });
       }
       const newComment = await Comment.create({
-        name: name,
-        email: email,
-        content: content,
+        name: user.name,
+        email: user.email,
+        content: req.body.content,
         blog: blog._id,
       });
       res.status(201).json({

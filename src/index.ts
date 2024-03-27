@@ -3,10 +3,13 @@ import { Request, Response } from "express";
 import blogRouter from "./routes/blogRouter";
 import userRouter from "./routes/userRouter";
 import commentRouter from "./routes/commentRouter";
+import QueriesRouter from "./routes/queriesRouter";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import docRouter from "./swagger_doc/swagger";
+import LikeRouter from "./routes/likeRouter";
+import like from "./models/like";
 dotenv.config();
  const app = express();
 
@@ -34,6 +37,8 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/v1/blogs", blogRouter);
 app.use("/api/v1/blogs", commentRouter)
 app.use("/api/v1/users", userRouter)
+app.use("/api/v1/blogs", LikeRouter)
+app.use("/api/v1", QueriesRouter)
 
 
 app.use("/*", (req: Request, res: Response) => {

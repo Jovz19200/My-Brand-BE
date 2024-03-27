@@ -22,7 +22,7 @@ const generateToken = (user: any) =>{
 }
 
 
-export const Authorization = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const Authorization = async (req: Request, res: Response, next: NextFunction) => {
     let token: string | undefined = undefined;
 
     try {
@@ -33,7 +33,7 @@ export const Authorization = async (req: Request, res: Response, next: NextFunct
             token = req.headers.authorization.split(" ")[1];
         }
         if (!token) {
-            res.status(401).json({
+           return  res.status(401).json({
                 status: "failed",
                 message: "You are not logged in. Please login to continue.",
             });
@@ -48,14 +48,14 @@ export const Authorization = async (req: Request, res: Response, next: NextFunct
         const decoded: any = jwt.verify(token, secret);
         const loggedUser: UserType = await getSingleUser(decoded.userId);
         if (!loggedUser) {
-            res.status(401).json({
+            return res.status(401).json({
                 status: "failed",
                 message: "Token has expired. Please login again.",
             });
         }
         const isAdmin = loggedUser.role === "admin";
         if(!isAdmin){
-            res.status(401).json({
+            return res.status(401).json({
                 status: "failed",
                 message: "only admin user have this access"
             });
@@ -67,7 +67,7 @@ export const Authorization = async (req: Request, res: Response, next: NextFunct
             throw new Error("you are not authorised for this action")
         }
     } catch (error: any) {
-        res.status(401).json({
+       return  res.status(401).json({
             status: "failed",
             error: error.message + " Token has expired. Please login again.",
         });
