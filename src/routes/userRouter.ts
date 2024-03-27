@@ -6,7 +6,7 @@ import { isLogged } from "../middlewares/isLogged";
 import { Authorization } from "../middlewares/authorization";
 
 router.post("/", registerUser);
-router.get("/", isLogged,getAllUsers);
+router.get("/", isLogged, isAdmin, getAllUsers);
 router.get("/:id", isLogged, getUserById);
 router.patch("/:id", isLogged, isAdmin, updateUser);
 router.delete("/:id", isLogged, isAdmin, deleteUser);
