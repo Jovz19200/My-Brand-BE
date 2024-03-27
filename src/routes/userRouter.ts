@@ -3,12 +3,13 @@ import { registerUser, getAllUsers, getUserById, deleteUser, updateUser, authUse
 const router = express.Router();
 import { isAdmin } from "../middlewares/isAdmin";
 import { isLogged } from "../middlewares/isLogged";
+import { Authorization } from "../middlewares/authorization";
 
 router.post("/", registerUser);
-router.get("/", isLogged, isAdmin, getAllUsers);
+router.get("/", getAllUsers);
 router.get("/:id", isLogged, getUserById);
-router.patch("/:id", isAdmin, updateUser);
-router.delete("/:id", isAdmin, deleteUser);
+router.patch("/:id", isLogged, isAdmin, updateUser);
+router.delete("/:id", isLogged, isAdmin, deleteUser);
 router.post("/auth", authUser);
 
 export default router;

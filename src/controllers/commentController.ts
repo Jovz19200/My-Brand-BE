@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 
 export const addComment = async (req: Request, res: Response) => {
   let user: any  = req.user;
+
     try {
       const blogId = req.params.id;
       const blog = await Blog.findOne({ _id: blogId });
