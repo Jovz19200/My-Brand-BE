@@ -12,7 +12,7 @@ declare global {
 }
 
 export const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
-    const { user } = req;
+    let  user: any  = req.user;
     try {
         if (!user) {
             return res.status(401).json({
