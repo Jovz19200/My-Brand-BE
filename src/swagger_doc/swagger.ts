@@ -11,7 +11,8 @@ const options = {
     description: "Documentation of My Brand Backend.",
   },
 
-  servers: [ {
+  servers: [ 
+    {
     url: "https://my-brand-be-sor4.onrender.com/"
   }],
 
@@ -170,9 +171,43 @@ const options = {
         responses: {
           204: {
             description: "No Content",
+            content:{
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    status: {
+                      type: "string",
+                      example: "success",
+                    },
+                    message: {
+                      type: "string",
+                      example: "User deleted successfully",
+                    },
+                  },
+                },
+              },
+            }
           },
           404: {
             description: "Not Found",
+            content:{
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    status: {
+                      type: "string",
+                      example: "failed",
+                    },
+                    message: {
+                      type: "string",
+                      example: "User was not found",
+                    },
+                  },
+                },
+              },
+            }
           },
         },
       },
@@ -360,9 +395,43 @@ const options = {
         responses: {
           204: {
             description: "No Content",
+            content:{
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    status: {
+                      type: "string",
+                      example: "success",
+                    },
+                    message: {
+                      type: "string",
+                      example: "Blog deleted successfully",
+                    },
+                  },
+                },
+              },
+            }
           },
           404: {
             description: "Not Found",
+            content:{
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    status: {
+                      type: "string",
+                      example: "failed",
+                    },
+                    message: {
+                      type: "string",
+                      example: "Blog was not found",
+                    },
+                  },
+                },
+              },
+            }
           },
         },
       },
@@ -588,9 +657,43 @@ const options = {
           responses: {
             204: {
               description: "No Content",
+              content:{
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    properties: {
+                      status: {
+                        type: "string",
+                        example: "success",
+                      },
+                      message: {
+                        type: "string",
+                        example: "Query deleted successfully",
+                      },
+                    },
+                  },
+                },
+              }
             },
             404: {
               description: "Not Found",
+              content:{
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    properties: {
+                      status: {
+                        type: "string",
+                        example: "failed",
+                      },
+                      message: {
+                        type: "string",
+                        example: "Query was not found",
+                      },
+                    },
+                  },
+                },
+              }
             },
           },
         },
