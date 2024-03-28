@@ -11,7 +11,7 @@ const router = express.Router();
 router.get("/", getBlogs);
 router.post("/", isLogged, isAdmin, upload.single("image"), createBlog);
 router.get("/:id", getBlogById);
-router.put("/:id", isLogged, isAdmin,upload.single("image"), updateBlog);
+router.patch("/:id", isLogged, isAdmin,upload.single("image"), updateBlog);
 router.delete("/:id", isLogged, isAdmin, deleteBlog);
 
 export default router;
