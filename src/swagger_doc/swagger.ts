@@ -28,6 +28,7 @@ const options = {
     "/api/v1/users": {
       get: {
         tags: ["Users"],
+        security: [{ bearerAuth: [] }],
         summary: "Get users",
         responses: {
           200: {
@@ -78,6 +79,7 @@ const options = {
     "/api/v1/users/{id}": {
       get: {
         tags: ["Users"],
+        security: [{ bearerAuth: [] }],
         summary: "Get user by ID",
         parameters: [
           {
@@ -108,6 +110,7 @@ const options = {
       },
       patch: {
         tags: ["Users"],
+        security: [{ bearerAuth: [] }],
         summary: "Update user by ID",
         parameters: [
           {
@@ -151,6 +154,7 @@ const options = {
       },
       delete: {
         tags: ["Users"],
+        security: [{ bearerAuth: [] }],
         summary: "Delete user by ID",
         parameters: [
           {
