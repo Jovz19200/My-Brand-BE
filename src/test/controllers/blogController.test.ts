@@ -57,7 +57,21 @@ describe("POST a comment", () =>{
       }
     )
     expect(response.status).toBe(201);
-  })}
+  })
+
+  it('should return 401 not authorized', async()=>{
+    const response = await request.post(`/api/v1/blogs/${blogId}/comments`)
+    .expect(401)
+    expect(response.body.status).toBe("Unauthorized")
+  })
+
+  it('should return 400 bad request if the content is empty', async() =>{
+    const response = await request.post(`/api/v1/blogs/${blogId}/comments`).set("Authorization", `Bearer ${token}`)
+    .send({
+      content: ""
+    })
+  })
+}
   catch(err: any){
     throw new Error(err)
   }
@@ -69,7 +83,14 @@ describe("GET comments", () =>{
       const response = await request.get(`/api/v1/blogs/${blogId}/comments`);
       expect(response.status).toBe(200);
       expect(response.body.status).toBe("success");
-    })}
+    })
+    it('should return 500 server error if invalid or blogID do not exist', async() =>{
+      let  nonExistingBlogId = blogId + "1" ;
+      const response = await request.get(`/api/v1/blogs/${nonExistingBlogId}/comments`);    
+      expect(response.status).toBe(500);
+      expect(response.body.error).toBe("Server error");
+    })
+  }
     catch(err: any){
       throw new Error(err)    
     }
@@ -102,6 +123,10 @@ describe("POST a like on a blog", () =>{
     const response = await request.post(`/api/v1/blogs/${blogId}/likes`).set("Authorization", `Bearer ${token}`)
     expect(response.body.status).toBe ("success")
   })
+  it('should return 400 bad request if the blogId is invalid', async() =>{
+    const response = await request.post(`/api/v1/blogs/${blogId + "1"}/likes`).set("Authorization", `Bearer ${token}`)
+    expect(response.status).toBe(400)
+  })  
 }
   catch(err: any){
     throw new Error(err)

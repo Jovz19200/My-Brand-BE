@@ -32,7 +32,7 @@ export const removeUser = async (id: string) => {
     return
 }
 
-export const editUser = async (id: string, user: UserType) => {
+export const editUser = async (id: string, user: any) => {
     const newUser = await User.findByIdAndUpdate(id, user);
     return newUser
 }

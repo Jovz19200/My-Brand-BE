@@ -25,7 +25,6 @@ export const like = async (req: Request, res: Response) => {
       });
     }
   } catch (error: any) {
-    console.error(error);
     res.status(400).json({ message: error.message });
   }
 };
