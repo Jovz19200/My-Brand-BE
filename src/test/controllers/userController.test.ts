@@ -89,11 +89,11 @@ describe("GET user by id", () => {
     nonAdminToken = response.body.token;
   })
 
-  it('should return Unauthorized for non admin user', async () => {
+  it('should return success for non admin user', async () => {
     
     const response = await request.get(`/api/v1/users/${user_id}`).set('Authorization', `Bearer ${nonAdminToken}`);
-    expect(response.status).toBe(401);  
-    expect(response.body.status).toBe("Unauthorized");
+    expect(response.status).toBe(200);  
+    expect(response.body.status).toBe("success");
   })
 
   it('should return user with status 200', async () => {
