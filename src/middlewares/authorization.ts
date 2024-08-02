@@ -39,6 +39,7 @@ export const Authorization = async (req: Request, res: Response, next: NextFunct
             });
         }
         const secret: string | undefined = process.env.JWT_SECRET;
+        console.log("secret", process.env.JWT_SECRET);
         if (!secret) {
             throw new Error("JWT secret is not defined.");
         }

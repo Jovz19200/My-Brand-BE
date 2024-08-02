@@ -8,7 +8,9 @@ v2.config({
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET,
 });
-
+console.log("secret", process.env.JWT_SECRET);
+console.log(`MongoURI`, process.env.MONGOURI);
+console.log('DB password', process.env.DB_PASSWORD);
 const uploadFile = async (file: any, res: Response) => {
     try {
       const upload = await cloudinary.uploader.upload(file.path);
