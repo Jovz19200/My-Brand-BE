@@ -8,10 +8,9 @@ v2.config({
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET,
 });
-
-console.log("Cloud Name",process.env.CLOUD_NAME);
-console.log("API_Key",process.env.API_KEY);
-console.log("API_Secret",process.env.API_SECRET);
+console.log("secret", process.env.JWT_SECRET);
+console.log(`MongoURI`, process.env.MONGOURI);
+console.log('DB password', process.env.DB_PASSWORD);
 
 const uploadFile = async (file: any, res: Response) => {
     try {
